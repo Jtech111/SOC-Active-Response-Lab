@@ -79,7 +79,7 @@ hydra -l jimmie -P /tmp/passwords.txt ssh://192.168.64.8 -t 4 -V -I
 ```
 
 ### Evidence: Hydra Firing + Live Log Stream Simultaneously
-![Attack and live detection](screenshots/hydra-live-tail.png)
+![Attack and live detection](screenshots/Hydra-live-tail.png)
 
 ---
 
@@ -100,7 +100,7 @@ immediately in the same stream.
 attack traffic and legitimate admin activity simultaneously.
 
 ### Evidence: Live Tail Stream During Attack
-![Live tail stream](screenshots/live-tail-accepted.png)
+![Live tail stream](screenshots/Live-tail-accepted.png)
 
 ---
 
@@ -127,10 +127,10 @@ Wazuh's correlation rules that escalate from individual failures to a confirmed
 brute force pattern automatically, with zero manual configuration.
 
 ### Evidence: Wazuh Threat Hunting Dashboard
-![Wazuh threat hunting dashboard](screenshots/wazuh-threat-hunting.png)
+![Wazuh threat hunting dashboard](screenshots/Wazuh-threat-hunting.png)
 
 ### Evidence: Wazuh Events Table (Rule IDs and Levels)
-![Wazuh events table](screenshots/wazuh-events-table.png)
+![Wazuh events table](screenshots/Wazuh-events-table.png)
 
 ---
 
@@ -200,7 +200,7 @@ sudo grep "Failed password" /var/log/auth.log \
 ```
 
 ### Evidence: Forensics Commands Running
-![Forensics investigation](screenshots/forensics-ranked-ips.png)
+![Forensics investigation](screenshots/Forensics-ranked-ips.png)
 
 ### Evidence: Zero Accepted Passwords From Attacker
 
@@ -219,7 +219,7 @@ sudo grep "Failed password" /var/log/auth.log \
 any manual configuration — visible in the Threat Hunting dashboard.
 
 ### Evidence: MITRE ATT&CK Mapping in Wazuh
-![MITRE mapping](screenshots/wazuh-threat-hunting.png)
+![MITRE mapping](screenshots/Wazuh-threat-hunting.png)
 
 ---
 
