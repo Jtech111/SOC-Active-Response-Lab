@@ -335,11 +335,8 @@ Zero manual triage required.
 
 ---
 
-### Evidence
-
-![SPL Query and Detection Results](screenshots/splunk-spl-query.png)
-![Raw Failed Password Events in Splunk](screenshots/splunk-detection-results.png)
-
+![SPL Query and Detection Results](splunk-spl-query.png)
+![Raw Failed Password Events in Splunk](splunk-detection-results.png)
 ---
 
 ### What This Proves
