@@ -281,3 +281,79 @@ validated and visualized in the Wazuh dashboard.
 *Lab environment: UTM hypervisor on Apple Silicon M3 |
 Wazuh 4.14.5 | Ubuntu Server 24.04 ARM64 |
 CompTIA Security+ CE | CompTIA CySA+ CE | Active TS Clearance*
+
+---
+
+---
+
+## Version 3 — Splunk Cloud SIEM + SPL Detection Engineering
+
+**Upgrade from V2:** Integrated a second enterprise SIEM platform alongside Wazuh.
+Ingested live `auth.log` telemetry into Splunk Cloud via a custom Python/HEC pipeline
+and authored a custom SPL detection rule that automatically identifies and
+severity-rates brute force attacks — no manual analysis required.
+
+---
+
+### Architecture
+
+- **Data Pipeline:** Python script using HTTP Event Collector (HEC) ships
+  `auth.log` from `soc-target` directly to Splunk Cloud — no native forwarder agent required
+- **SIEM:** Splunk Cloud (`prd-p-1q6pg.splunkcloud.com`)
+- **Detection:** Custom SPL analytics rule with automated threat-level scoring
+
+---
+
+### The SPL Detection Rule
+
+```spl
+index=main sourcetype=linux_secure "Failed password"
+| rex field=_raw "from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| stats count as failed_attempts by src_ip
+| where failed_attempts > 5
+| sort -failed_attempts
+| eval threat_level=if(failed_attempts>15,"HIGH","MEDIUM")
+```
+
+**Line by line:**
+- `index=main sourcetype=linux_secure "Failed password"` — isolate failed SSH login events
+- `rex` — surgically extract the attacker IP into a clean field
+- `stats count` — aggregate attempt volume per source IP
+- `where failed_attempts > 5` — filter out noise, surface only real threats
+- `eval threat_level` — auto-score severity: HIGH above 15 attempts, MEDIUM above 5
+
+---
+
+### Detection Result
+
+| src_ip | failed_attempts | threat_level |
+|---|---|---|
+| 192.168.64.3 | 40 | HIGH |
+
+Attacker IP `192.168.64.3` (soc-siem attacker account) flagged HIGH automatically.
+Zero manual triage required.
+
+---
+
+### Evidence
+
+![SPL Query and Detection Results](screenshots/splunk-spl-query.png)
+![Raw Failed Password Events in Splunk](screenshots/splunk-detection-results.png)
+
+---
+
+### What This Proves
+
+- **Custom data ingestion:** Python/HEC pipeline delivers logs to Splunk Cloud
+  without native agent support — mirrors real-world custom sensor integration
+- **SPL authoring:** Written from scratch, not a template — field extraction,
+  statistical aggregation, threshold filtering, and conditional scoring in one query
+- **Dual-SIEM environment:** Wazuh (open-source, on-premises) and Splunk Cloud
+  (enterprise, cloud-native) running simultaneously against the same endpoint —
+  demonstrates platform versatility across the two most common SOC SIEM stacks
+- **Detection engineering mindset:** The query doesn't just find events —
+  it ranks, filters, and scores them automatically, reducing analyst workload
+
+---
+
+*Week 2 completed: June 8, 2026 | Tools: Splunk Cloud, SPL, Python, HEC API*
