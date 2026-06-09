@@ -354,3 +354,100 @@ Zero manual triage required.
 ---
 
 *Week 2 completed: June 8, 2026 | Tools: Splunk Cloud, SPL, Python, HEC API*
+
+---
+
+## Version 4 — Defensive Hardening & Incident Response
+
+**Objective:** Harden `soc-target` against the SSH brute-force attack validated
+in Versions 2 and 3 — proving the complete incident response loop:
+detect → investigate → contain → remediate.
+
+---
+
+### Three-Layer Defense Stack
+
+| Layer | Control | Configuration |
+|---|---|---|
+| 1 | fail2ban | Ban after 5 failures in 60 seconds, 5-minute bantime |
+| 2 | sshd_config | MaxAuthTries 3, PermitRootLogin no, LoginGraceTime 20 |
+| 3 | UFW Firewall | Deny all incoming, SSH allow from 192.168.64.0/24 only |
+
+---
+
+### Before vs After Hardening
+
+| Metric | Before Hardening | After Hardening |
+|---|---|---|
+| Failed attempts logged | 24 — landed freely | Attack cut off at attempt 14 |
+| Attacker IP status | Unrestricted | Auto-banned by fail2ban |
+| SSH from attacker | Accepted | Connection refused |
+| Root login via SSH | Permitted | Disabled (PermitRootLogin no) |
+| Max auth tries | Unlimited | 3 attempts then disconnect |
+| Incoming traffic | Open | Deny all except lab subnet |
+
+---
+
+### Evidence
+
+**Baseline — Before Any Hardening**
+![Before hardening baseline](screenshots/before-hardening-baseline.png)
+
+**Full Attack + Detection + Ban — Simultaneously**
+![Full attack detection composite](screenshots/full-attack-detection-composite.png)
+
+**fail2ban Status — Banned IP Confirmed**
+![fail2ban ban confirmed](screenshots/fail2ban-ban-confirmed.png)
+
+**Connection Refused — Attack Blocked**
+![Connection refused composite](screenshots/connection-refused-composite.png)
+
+![Connection refused clean](screenshots/connection-refused-clean.png)
+
+**fail2ban Full Lifecycle — Ban, Unban, Re-ban**
+![fail2ban full lifecycle](screenshots/fail2ban-full-lifecycle.png)
+
+**UFW Firewall + SSH Hardening Applied**
+![UFW and SSH hardening](screenshots/ufw-ssh-hardening.png)
+
+---
+
+### The Unban Procedure
+
+When a legitimate user is caught by fail2ban:
+
+```bash
+# Step 1 — Check who is banned
+sudo fail2ban-client status sshd
+
+# Step 2 — Review auth.log for that IP
+sudo grep "192.168.64.x" /var/log/auth.log | tail -20
+
+# Step 3 — Confirm legitimate user with manager if needed
+
+# Step 4 — Unban when cleared
+sudo fail2ban-client set sshd unbanip 192.168.64.x
+
+# Step 5 — Document in incident ticket
+```
+
+---
+
+### What This Proves
+
+- **Complete IR loop:** Detect → Investigate → Contain → Remediate — validated
+  end-to-end on live infrastructure, not simulated
+- **Defense-in-depth:** Three independent layers — if fail2ban misses it,
+  sshd_config limits the damage; if both fail, UFW blocks the connection entirely
+- **Operational judgment:** Knows when to unban vs keep isolated — the analyst
+  decision that separates Tier 1 from Tier 2
+- **Before/after evidence:** Quantified improvement — 24 attempts landed freely
+  before hardening, attack cut off at attempt 14 after — documented with
+  screenshots at every stage
+- **Production discipline:** Config backup before changes, syntax test before
+  restart, verified functionality after every control — the operational habits
+  that prevent outages in real environments
+
+---
+
+*Week 3 completed: June 9, 2026 | Controls: fail2ban, sshd_config, UFW*
