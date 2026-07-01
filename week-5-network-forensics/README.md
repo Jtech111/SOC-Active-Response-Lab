@@ -31,3 +31,17 @@ T1110.001 — Brute Force: Password Guessing
 Evidence visible at: packet timing, RST storm, single-source 
 high-volume port 22 connections
 
+
+## Evidence Screenshots
+
+### Brute Force Filter Applied
+![Brute Force Filter](wireshark-brute-force-filter.png)
+*Filter ip.src == 192.168.64.9 — 673 of 1,343 packets were attacker traffic*
+
+### Full Capture — All 1,343 Packets
+![Full Capture](wireshark-full-capture.png)
+*Unfiltered view showing complete attack traffic recorded by tcpdump*
+
+### Packet Detail Pane
+![Packet Detail](wireshark-packet-detail.png)
+*Single packet expanded — shows TCP/SSH protocol layers and connection metadata*
