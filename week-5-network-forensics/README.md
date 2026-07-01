@@ -45,3 +45,9 @@ high-volume port 22 connections
 ### Packet Detail Pane
 ![Packet Detail](wireshark-packet-detail.png)
 *Single packet expanded — shows TCP/SSH protocol layers and connection metadata*
+
+## Evidence
+
+### Live Attack Capture — Wireshark + Hydra
+![Attack Evidence](wireshark-attack-evidence.png)
+*ip.src == 192.168.64.9 filter applied — 673 of 1,343 packets confirmed attacker traffic from soc-siem against soc-target port 22*
