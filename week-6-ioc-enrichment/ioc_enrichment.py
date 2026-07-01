@@ -1,9 +1,8 @@
 import requests
 import sys
-import os
 from datetime import datetime
 
-API_KEY = os.environ.get("VT_API_KEY")
+API_KEY = "YOUR_KEY_HERE"
 
 def check_ip(ip):
     url = f"https://www.virustotal.com/api/v3/ip_addresses/{ip}"
@@ -17,6 +16,7 @@ def check_ip(ip):
 
     malicious  = stats.get("malicious", 0)
     suspicious = stats.get("suspicious", 0)
+    total      = malicious + suspicious
 
     if malicious >= 5:
         verdict = "MALICIOUS"

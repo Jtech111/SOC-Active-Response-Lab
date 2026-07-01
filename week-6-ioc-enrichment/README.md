@@ -38,15 +38,16 @@ Engines:  14 malicious / 4 suspicious
 VERDICT:  MALICIOUS
 
 ## Security Note
-API key is stored as an environment variable — never hardcoded in the script.
-Run: export VT_API_KEY="your_key_here" before executing.
+API key stored as environment variable — never hardcoded in the script.
+Run export VT_API_KEY="your_key_here" before executing.
 
 ## Usage
-```bash
 export VT_API_KEY="your_key_here"
 python3 ioc_enrichment.py <IP_ADDRESS>
-```
+
+## Key Lesson
+Private IPs (192.168.x.x, 10.x.x.x) have no VirusTotal record — only enrich external IPs from real alerts. Internal IPs are investigated through SIEM logs.
 
 ## MITRE ATT&CK Mapping
-T1110.001 — Brute Force: Password Guessing (primary use case for IP enrichment)
-T0r Infrastructure — identifying known anonymization infrastructure
+T1110.001 — Brute Force: Password Guessing
+Tor Infrastructure — identifying known anonymization infrastructure
