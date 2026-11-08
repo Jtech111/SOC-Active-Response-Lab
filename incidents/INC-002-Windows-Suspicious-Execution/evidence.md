@@ -141,3 +141,30 @@ The configured detection threshold identifies activity requiring review. It does
 ## 7. Evidence Limitations
 
 The investigation is limited to Windows
+
+
+---
+
+## 8. Analyst Assessment
+
+TBD
+
+The final assessment will be based on observed Windows authentication events, Splunk detection results, related successful logons, and the confirmed investigation scope.
+
+Observed evidence will be distinguished from analyst assessment and inference.
+
+---
+
+## 9. Evidence References
+
+Related investigation documentation:
+
+- [Case Record](case.md)
+- [Investigation Timeline](timeline.md)
+
+Supporting evidence should include:
+
+- Windows Security Event ID 4625 records
+- Related Event ID 4624 records
+- Splunk detection results
+- Relevant timestamps and screenshots
