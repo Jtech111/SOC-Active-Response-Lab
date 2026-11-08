@@ -140,7 +140,12 @@ The configured detection threshold identifies activity requiring review. It does
 
 ## 7. Evidence Limitations
 
-The investigation is limited to Windows
+
+The investigation is limited to Windows Security Event Logs and supporting telemetry available within the lab environment.
+
+Missing timestamps, source addresses, account details, or related authentication events must remain documented as unavailable until verified.
+
+No successful authentication, credential compromise, or malicious activity will be claimed without supporting evidence.
 
 
 ---
