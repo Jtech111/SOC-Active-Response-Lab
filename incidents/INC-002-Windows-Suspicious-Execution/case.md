@@ -144,54 +144,117 @@ Observed evidence will be distinguished from analyst assessment and inference.
 
 ---
 
-## 6. MITRE ATT&CK Mapping
+## 6.MITRE ATT&CK Mapping
 
-| Technique | Description | Evidence |
-|---|---|---|
-| TBD | TBD | TBD |
+Technique
 
-MITRE ATT&CK techniques will only be assigned when supported by the investigation evidence.
+Description
+
+Evidence
+
+T1110.001
+
+Password Guessing
+
+TBD — requires investigation evidence showing a repeated failed-logon pattern
+
+T1078
+
+Valid Accounts
+
+TBD — only applicable if successful authentication is identified in related telemetry
+
+MITRE ATT&CK techniques will only be assigned as confirmed findings when supported by investigation evidence.
 
 ---
 
 ## 7. Response
 
-**TBD**
+TBD
 
-Response actions will be determined based on the confirmed scope and severity of the activity.
+Response actions will be determined based on the confirmed scope and severity of the authentication activity.
 
+Potential response considerations include:
+
+Confirming whether the source is authorized
+
+Reviewing the targeted account
+
+Validating whether successful authentication occurred
+
+Applying appropriate account or network controls when malicious activity is confirmed
+
+Escalating when evidence indicates credential compromise or broader attack activity
+
+No response action will be documented as completed unless supported by observed evidence.
 ---
 
 ## 8. Validation
 
-**TBD**
+TBD
 
-Post-response validation will determine whether the activity was successfully contained or whether additional investigation is required.
+Post-response validation will determine whether the failed-logon activity has stopped or whether additional suspicious authentication activity remains.
 
+Validation may include:
+
+Reviewing subsequent Event ID 4625 activity
+
+Checking for related Event ID 4624 successful logons
+
+Confirming whether the source continues generating authentication failures
+
+Reviewing the affected account for additional suspicious activity
+
+Confirming that any defensive action produced the expected result
 ---
 
 ## 9. Escalation Decision
 
-**TBD**
+TBD
 
 Escalation will be considered if investigation evidence identifies:
 
-- Confirmed malicious execution
-- Credential compromise
-- Persistence
-- Lateral movement
-- Privileged account involvement
-- Additional affected systems
-- Confirmed malware
-- Evidence of broader compromise
+High-volume or sustained failed-logon activity
 
+Successful authentication associated with the failed-logon pattern
+
+Evidence of password guessing or brute-force activity
+
+Privileged account targeting
+
+Credential compromise
+
+Multiple affected hosts or accounts
+
+Suspicious activity from an unauthorized source
+
+Evidence of lateral movement
+
+Additional indicators of compromise
+
+The escalation decision will be based on the documented severity and available evidence
 ---
 
 ## 10. Final Disposition
 
-**TBD**
+TBD
 
-The final disposition will be based on the completed investigation.
+The final disposition will be based on the completed investigation and supporting evidence.
+
+Possible dispositions include:
+
+Benign Authentication Activity
+
+Suspicious Activity — No Confirmed Compromise
+
+Confirmed Brute-Force Activity
+
+Confirmed Credential Compromise
+
+False Positive
+
+Escalated for Additional Investigation
+
 
 ---
 
@@ -199,14 +262,30 @@ The final disposition will be based on the completed investigation.
 
 Supporting evidence should include:
 
-- Windows event logs
-- Process execution telemetry
-- Command-line evidence
-- Sentinel alerts or incidents
-- Relevant screenshots
-- Related network or authentication telemetry
+Windows Security Event ID 4625 records
+
+Related Event ID 4624 records
+
+Source IP information
+
+Target account information
+
+Target host information
+
+Logon type
+
+Authentication timestamps
+
+Splunk detection results
+
+Relevant screenshots
+
+Related authentication or network telemetry
 
 Detailed evidence and timestamps will be documented in:
 
-- [Timeline](timeline.md)
-- [Evidence](evidence.md)
+Timeline
+
+Evidence
+
+Evidence should distinguish directly observed telemetry from analyst assessment, inference, and investigation limitations.
