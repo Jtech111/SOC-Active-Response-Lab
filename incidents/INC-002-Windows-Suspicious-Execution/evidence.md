@@ -1,16 +1,58 @@
-# INC-002 — Windows Suspicious Execution Evidence Record
+# INC-002 — Windows Failed Logon Evidence Record
 
 ## Evidence Summary
 
-This document records the evidence reviewed during the investigation.
+This document records the evidence reviewed during the Windows failed-logon investigation.
 
-Evidence should distinguish between directly observed telemetry and analyst interpretation.
+Evidence must distinguish directly observed Windows authentication telemetry from analyst assessment, inference, and investigation limitations.
 
 ---
 
 ## 1. Detection Evidence
 
-**Source:** Microsoft Sentinel / Windows telemetry
+**Detection Source:** Splunk Cloud / Windows Security Event Logs
+
+**Event ID:** 4625 — Failed Logon
+
+**Detection Logic:**
+
+The Splunk detection identifies repeated failed-logon activity:
+
+```spl
+index=main EventCode=4625
+| stats count as failed_logons by src_ip, Account_Name
+| where failed_logons > 5
+| eval threat_level=if(failed_logons>15,"HIGH","MEDIUM")
+| sort -failed_logons
+```
+
+**Observed Evidence:**
+
+TBD — Record the actual alert, event count, source IP, account, host, and timestamps.
+
+**Analyst Assessment:**
+
+TBD — Determine whether the activity represents normal authentication failures or suspicious behavior.
+
+---
+
+## 2. Failed Authentication Evidence
+
+**Event ID:** 4625
+
+**Source IP:** TBD
+
+**Target Account:** TBD
+
+**Target Host:** TBD
+
+**Logon Type:** TBD
+
+**First Observed:** TBD
+
+**Last Observed:** TBD
+
+**Failed-Logon Count:** TBD
 
 **Observed Evidence:**
 
@@ -22,37 +64,27 @@ TBD
 
 ---
 
-## 2. Process Execution Evidence
+## 3. Related Successful Authentication
 
-**Process:** TBD
+**Event ID:** 4624 — Successful Logon
 
-**Parent Process:** TBD
+**Related Source IP:** TBD
 
-**User Context:** TBD
+**Target Account:** TBD
 
-**Command Line:** TBD
+**Target Host:** TBD
 
-**Execution Time:** TBD
+**Logon Type:** TBD
 
-**Host:** TBD
-
-**Observed Evidence:**
-
-TBD
-
----
-
-## 3. Supporting Windows Telemetry
-
-**Event Sources:**
-
-- Windows Security logs
-- Windows process execution telemetry
-- Microsoft Sentinel alerts/incidents
+**Timestamp:** TBD
 
 **Observed Evidence:**
 
-TBD
+TBD — Document any successful authentication associated with the investigated activity.
+
+**Analyst Assessment:**
+
+TBD — Determine whether a successful logon is related to the failed-logon pattern. Do not assume compromise from an unrelated successful logon.
 
 ---
 
@@ -64,59 +96,48 @@ TBD
 
 Investigated for:
 
-- Successful authentication
-- Failed authentication
-- Privileged account activity
-- Unusual user activity
+- Repeated failed authentication
+- Related successful authentication
+- Privileged account targeting
+- Account-specific activity
+- Logon type and authentication pattern
+- Unusual authentication timing
 
 ---
 
-## 5. Network Context
+## 5. Scope Assessment
 
-**Observed Evidence:**
-
-TBD
-
-Investigated for:
-
-- External connections
-- Internal connections
-- Suspicious destinations
-- Related network activity
-
----
-
-## 6. Scope Assessment
+**Source IP:** TBD
 
 **Affected Host:** TBD
 
-**Affected User:** TBD
+**Target Account:** TBD
 
 **Additional Hosts:** TBD
 
-**Additional Indicators:** TBD
+**Additional Accounts:** TBD
 
 **Scope Determination:** TBD
 
 ---
 
+## 6. Detection Assessment
+
+**Configured Threshold:** More than 5 failed logons
+
+**Threat-Level Logic:**
+
+- MEDIUM: More than 5 failed logons
+- HIGH: More than 15 failed logons
+
+**Observed Detection Result:** TBD
+
+**Analyst Assessment:** TBD
+
+The configured detection threshold identifies activity requiring review. It does not independently confirm malicious activity.
+
+---
+
 ## 7. Evidence Limitations
 
-The investigation is limited to telemetry available within the lab environment.
-
-Any conclusions that cannot be directly established from available evidence will be documented as analyst assessment or inference rather than confirmed fact.
-
----
-
-## 8. Analyst Assessment
-
-**TBD**
-
----
-
-## 9. Evidence References
-
-Related investigation documentation:
-
-- [Case Record](case.md)
-- [Investigation Timeline](timeline.md)
+The investigation is limited to Windows
