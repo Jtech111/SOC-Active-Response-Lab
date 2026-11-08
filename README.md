@@ -66,17 +66,9 @@ Remediate
 Validate
   ↓
 Document / Close
+```
 
----
 
----
+
 
 ## Incident Investigations
-
-Documented investigations are maintained in the [SOC Incident Case Register](incidents/README.md).
-
-| ID | Investigation | Status |
-|---|---|---|
-| INC-001 | SSH Brute Force | Closed |
-| INC-002 | Windows Suspicious Execution | Planned |
-| INC-003 | Phishing Investigation | Planned |
