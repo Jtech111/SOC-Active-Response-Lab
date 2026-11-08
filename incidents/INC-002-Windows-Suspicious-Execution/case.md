@@ -27,21 +27,27 @@ The objective of this investigation is to determine whether the failed-logon act
 
 ## 2. Initial Triage
 
+### ## 2. Initial Triage
+
 ### Detection Validation
 
-The alert will be validated against the available Windows telemetry and associated security events.
+The alert will be validated against Windows Security Event Logs and the associated Splunk detection logic.
+
+The investigation will determine whether the observed failed-logon activity meets the detection threshold and whether the activity represents normal authentication behavior or suspicious activity.
 
 ### Initial Assessment
 
 The activity requires investigation to determine:
 
-- Executed process
-- Parent process
-- User context
-- Command-line activity
-- Execution time
-- Affected host
-- Related events
+- Failed-logon count
+- Source IP address
+- Target account
+- Target host
+- Time range of activity
+- Logon type
+- Related successful logons
+- Related authentication events
+- Whether the pattern is consistent with brute-force activity
 
 ### Initial Severity
 
