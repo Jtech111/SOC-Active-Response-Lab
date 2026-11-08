@@ -5,7 +5,7 @@
 | Field | Value |
 |---|---|
 | Case ID | INC-002 |
-| Incident Type | Windows Suspicious Execution |
+| Incident Type | Windows Failed Logon Investigation |
 | Detection Source | Splunk Cloud / Windows Security Event Logs |
 | Investigation Status | Open |
 | Initial Severity | TBD |
