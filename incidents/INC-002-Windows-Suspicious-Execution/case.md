@@ -1,4 +1,4 @@
-# INC-002 — Windows Suspicious Execution Investigation
+# INC-002 — Windows Failed Logon Investigation
 
 ## Case Summary
 
