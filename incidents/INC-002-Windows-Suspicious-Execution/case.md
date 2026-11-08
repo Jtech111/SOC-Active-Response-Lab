@@ -19,9 +19,9 @@
 
 ## 1. Alert
 
-A Windows security event or detection associated with suspicious process execution was identified for investigation.
+A Windows Security Event Log detection associated with repeated failed authentication attempts was identified for investigation.
 
-The objective of this investigation is to determine whether the execution represents benign administrative activity, suspicious behavior, or confirmed malicious activity.
+The objective of this investigation is to determine whether the failed-logon activity represents normal user error, suspicious authentication behavior, or a potential brute-force pattern.
 
 ---
 
