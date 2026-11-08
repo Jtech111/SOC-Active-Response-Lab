@@ -6,7 +6,7 @@
 |---|---|
 | Case ID | INC-002 |
 | Incident Type | Windows Suspicious Execution |
-| Detection Source | Microsoft Sentinel / Windows telemetry |
+| Detection Source | Splunk Cloud / Windows Security Event Logs |
 | Investigation Status | Open |
 | Initial Severity | TBD |
 | Final Severity | TBD |
