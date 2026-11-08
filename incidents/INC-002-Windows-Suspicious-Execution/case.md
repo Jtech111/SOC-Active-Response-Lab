@@ -27,7 +27,6 @@ The objective of this investigation is to determine whether the failed-logon act
 
 ## 2. Initial Triage
 
-### ## 2. Initial Triage
 
 ### Detection Validation
 
