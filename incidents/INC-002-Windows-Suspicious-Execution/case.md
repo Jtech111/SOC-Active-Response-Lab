@@ -59,49 +59,89 @@ Severity will be determined after reviewing the available evidence.
 
 ## 3. Investigation
 
-The investigation will review:
+The investigation will review Windows Security Event Logs and Splunk telemetry associated with the failed-logon activity.
 
-- Windows event telemetry
-- Process execution data
-- Parent/child process relationships
-- Command-line information
-- User context
-- Host information
-- Related authentication activity
-- Related network activity
-- Available security alerts
+The investigation will examine:
+
+Event ID 4625 failed-logon events
+
+Failed-logon volume and frequency
+
+Source IP address
+
+Target account
+
+Target host
+
+Logon type
+
+Time range and activity pattern
+
+Related Event ID 4624 successful logons
+
+Related authentication events
+
+Whether the activity exceeds the configured detection threshold
+
+Whether the pattern is consistent with brute-force or password-guessing activity
+
+The investigation will correlate available authentication events to determine whether the activity represents isolated authentication failures or a broader security event
 
 ---
 
 ## 4. Scope Assessment
 
-### Source
+Source
 
-**TBD**
+TBD
 
-### Target
+The source IP associated with the failed-logon activity will be identified from the available Windows Security Event telemetry.
 
-**TBD**
+Target
 
-### User Context
+TBD
 
-**TBD**
+The affected Windows host and targeted account will be identified from the authentication events.
 
-### Process Execution
+Authentication Activity
 
-**TBD**
+TBD
 
-### Additional Compromise Indicators
+The investigation will determine the number, frequency, and timing of failed authentication attempts and identify any related successful logons.
 
-**TBD**
+Logon Type
+
+TBD
+
+The applicable Windows logon type will be identified and assessed in the context of the observed activity.
+
+Additional Compromise Indicators
+
+TBD
+
+The investigation will assess available telemetry for evidence of successful authentication, privileged account activity, additional affected systems, or other indicators of compromise.
 
 ---
 
 ## 5. Analyst Assessment
 
-**TBD**
+TBD
 
-The analyst assessment will be based on observed telemetry and documented evidence.
+The analyst assessment will determine whether the observed authentication activity is consistent with:
+
+Normal user authentication behavior
+
+Suspicious authentication activity
+
+Password guessing
+
+Brute-force activity
+
+Confirmed compromise
+
+The assessment will be based on observed Windows Security Event telemetry, Splunk detection results, authentication patterns, and available supporting evidence.
+
+Observed evidence will be distinguished from analyst assessment and inference.
 
 ---
 
