@@ -13,7 +13,7 @@
 | Disposition | TBD |
 | Escalation | TBD |
 | Affected Asset | TBD |
-| Investigation Focus | Process execution and supporting Windows telemetry |
+| Investigation Focus | Windows authentication activity and failed-logon patterns |
 
 ---
 
