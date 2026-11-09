@@ -27,7 +27,6 @@ The objective of this investigation is to determine whether the failed-logon act
 
 ## 2. Initial Triage
 
-
 ### Detection Validation
 
 The alert will be validated against Windows Security Event Logs and the associated Splunk detection logic.
@@ -62,61 +61,51 @@ The investigation will review Windows Security Event Logs and Splunk telemetry a
 
 The investigation will examine:
 
-Event ID 4625 failed-logon events
+- Event ID 4625 failed-logon events
+- Failed-logon volume and frequency
+- Source IP address
+- Target account
+- Target host
+- Logon type
+- Time range and activity pattern
+- Related Event ID 4624 successful logons
+- Related authentication events
+- Whether the activity exceeds the configured detection threshold
+- Whether the pattern is consistent with brute-force or password-guessing activity
 
-Failed-logon volume and frequency
-
-Source IP address
-
-Target account
-
-Target host
-
-Logon type
-
-Time range and activity pattern
-
-Related Event ID 4624 successful logons
-
-Related authentication events
-
-Whether the activity exceeds the configured detection threshold
-
-Whether the pattern is consistent with brute-force or password-guessing activity
-
-The investigation will correlate available authentication events to determine whether the activity represents isolated authentication failures or a broader security event
+The investigation will correlate available authentication events to determine whether the activity represents isolated authentication failures or a broader security event.
 
 ---
 
 ## 4. Scope Assessment
 
-Source
+### Source
 
-TBD
+**TBD**
 
 The source IP associated with the failed-logon activity will be identified from the available Windows Security Event telemetry.
 
-Target
+### Target
 
-TBD
+**TBD**
 
 The affected Windows host and targeted account will be identified from the authentication events.
 
-Authentication Activity
+### Authentication Activity
 
-TBD
+**TBD**
 
 The investigation will determine the number, frequency, and timing of failed authentication attempts and identify any related successful logons.
 
-Logon Type
+### Logon Type
 
-TBD
+**TBD**
 
 The applicable Windows logon type will be identified and assessed in the context of the observed activity.
 
-Additional Compromise Indicators
+### Additional Compromise Indicators
 
-TBD
+**TBD**
 
 The investigation will assess available telemetry for evidence of successful authentication, privileged account activity, additional affected systems, or other indicators of compromise.
 
@@ -124,19 +113,15 @@ The investigation will assess available telemetry for evidence of successful aut
 
 ## 5. Analyst Assessment
 
-TBD
+**TBD**
 
 The analyst assessment will determine whether the observed authentication activity is consistent with:
 
-Normal user authentication behavior
-
-Suspicious authentication activity
-
-Password guessing
-
-Brute-force activity
-
-Confirmed compromise
+- Normal user authentication behavior
+- Suspicious authentication activity
+- Password guessing
+- Brute-force activity
+- Confirmed compromise
 
 The assessment will be based on observed Windows Security Event telemetry, Splunk detection results, authentication patterns, and available supporting evidence.
 
@@ -144,25 +129,12 @@ Observed evidence will be distinguished from analyst assessment and inference.
 
 ---
 
-## 6.MITRE ATT&CK Mapping
+## 6. MITRE ATT&CK Mapping
 
-Technique
-
-Description
-
-Evidence
-
-T1110.001
-
-Password Guessing
-
-TBD — requires investigation evidence showing a repeated failed-logon pattern
-
-T1078
-
-Valid Accounts
-
-TBD — only applicable if successful authentication is identified in related telemetry
+| Technique | Description | Evidence |
+|---|---|---|
+| T1110.001 | Password Guessing | TBD — requires investigation evidence showing a repeated failed-logon pattern |
+| T1078 | Valid Accounts | TBD — only applicable if successful authentication is identified in related telemetry |
 
 MITRE ATT&CK techniques will only be assigned as confirmed findings when supported by investigation evidence.
 
@@ -170,91 +142,72 @@ MITRE ATT&CK techniques will only be assigned as confirmed findings when support
 
 ## 7. Response
 
-TBD
+**TBD**
 
 Response actions will be determined based on the confirmed scope and severity of the authentication activity.
 
 Potential response considerations include:
 
-Confirming whether the source is authorized
-
-Reviewing the targeted account
-
-Validating whether successful authentication occurred
-
-Applying appropriate account or network controls when malicious activity is confirmed
-
-Escalating when evidence indicates credential compromise or broader attack activity
+- Confirming whether the source is authorized
+- Reviewing the targeted account
+- Validating whether successful authentication occurred
+- Applying appropriate account or network controls when malicious activity is confirmed
+- Escalating when evidence indicates credential compromise or broader attack activity
 
 No response action will be documented as completed unless supported by observed evidence.
+
 ---
 
 ## 8. Validation
 
-TBD
+**TBD**
 
 Post-response validation will determine whether the failed-logon activity has stopped or whether additional suspicious authentication activity remains.
 
 Validation may include:
 
-Reviewing subsequent Event ID 4625 activity
+- Reviewing subsequent Event ID 4625 activity
+- Checking for related Event ID 4624 successful logons
+- Confirming whether the source continues generating authentication failures
+- Reviewing the affected account for additional suspicious activity
+- Confirming that any defensive action produced the expected result
 
-Checking for related Event ID 4624 successful logons
-
-Confirming whether the source continues generating authentication failures
-
-Reviewing the affected account for additional suspicious activity
-
-Confirming that any defensive action produced the expected result
 ---
 
 ## 9. Escalation Decision
 
-TBD
+**TBD**
 
 Escalation will be considered if investigation evidence identifies:
 
-High-volume or sustained failed-logon activity
+- High-volume or sustained failed-logon activity
+- Successful authentication associated with the failed-logon pattern
+- Evidence of password guessing or brute-force activity
+- Privileged account targeting
+- Credential compromise
+- Multiple affected hosts or accounts
+- Suspicious activity from an unauthorized source
+- Evidence of lateral movement
+- Additional indicators of compromise
 
-Successful authentication associated with the failed-logon pattern
+The escalation decision will be based on the documented severity and available evidence.
 
-Evidence of password guessing or brute-force activity
-
-Privileged account targeting
-
-Credential compromise
-
-Multiple affected hosts or accounts
-
-Suspicious activity from an unauthorized source
-
-Evidence of lateral movement
-
-Additional indicators of compromise
-
-The escalation decision will be based on the documented severity and available evidence
 ---
 
 ## 10. Final Disposition
 
-TBD
+**TBD**
 
 The final disposition will be based on the completed investigation and supporting evidence.
 
 Possible dispositions include:
 
-Benign Authentication Activity
-
-Suspicious Activity — No Confirmed Compromise
-
-Confirmed Brute-Force Activity
-
-Confirmed Credential Compromise
-
-False Positive
-
-Escalated for Additional Investigation
-
+- Benign Authentication Activity
+- Suspicious Activity — No Confirmed Compromise
+- Confirmed Brute-Force Activity
+- Confirmed Credential Compromise
+- False Positive
+- Escalated for Additional Investigation
 
 ---
 
@@ -262,30 +215,20 @@ Escalated for Additional Investigation
 
 Supporting evidence should include:
 
-Windows Security Event ID 4625 records
+- Windows Security Event ID 4625 records
+- Related Event ID 4624 records
+- Source IP information
+- Target account information
+- Target host information
+- Logon type
+- Authentication timestamps
+- Splunk detection results
+- Relevant screenshots
+- Related authentication or network telemetry
 
-Related Event ID 4624 records
+Detailed evidence and timestamps are documented in:
 
-Source IP information
-
-Target account information
-
-Target host information
-
-Logon type
-
-Authentication timestamps
-
-Splunk detection results
-
-Relevant screenshots
-
-Related authentication or network telemetry
-
-Detailed evidence and timestamps will be documented in:
-
-Timeline
-
-Evidence
+- [Investigation Timeline](timeline.md)
+- [Evidence Record](evidence.md)
 
 Evidence should distinguish directly observed telemetry from analyst assessment, inference, and investigation limitations.
